@@ -7,12 +7,17 @@ import studentRoutes from './routes/studentRoutes.js'
 dotenv.config()
 const app = express()
 
+// app.use(cors({
+//   origin: 'http://school.yogeshtech.xyz',
+//   methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+//   credentials: true,
+//   allowedHeaders: ['Content-Type', 'Authorization'],
+// }));app.use(express.json());app.use(express.json())
+
 app.use(cors({
-  origin: 'http://school.yogeshtech.xyz',
-  methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
-}));app.use(express.json());app.use(express.json())
+  origin: ['http://books.yogeshtech.xyz', 'http://school.yogeshtech.xyz'],
+  credentials: true
+}));
 
 app.use('/api/students', studentRoutes)
 
