@@ -10,7 +10,7 @@ function App() {
     <Layout>
       <Header style={{ backgroundColor: '#001529', padding: '0 20px' }}>
         <Title style={{ color: 'white', margin: 0 }} level={3}>
-          School Record Tracker Of Swami ji hanji bhai.........
+          School Record Tracker Of Swami ji hanji bhai..........
         </Title>
       </Header>
 
