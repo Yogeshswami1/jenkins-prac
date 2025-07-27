@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    environment {
+        GIT_CREDENTIALS_ID = 'github'
+    }
+
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git credentialsId: "${GIT_CREDENTIALS_ID}", url: 'https://github.com/Yogeshswami1/jenkins-prac.git', branch: 'main'
+            }
+        }
+
+        stage('Build Docker Images') {
+            steps {
+                dir('jenkins-prac') {
+                    sh 'docker-compose build'
+                }
+            }
+        }
+
+        stage('Deploy to AWS') {
+            steps {
+                dir('jenkins-prac') {
+                    sh 'docker-compose up -d'
+                }
+            }
+        }
+    }
+}
