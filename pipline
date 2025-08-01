@@ -12,20 +12,49 @@ pipeline {
             }
         }
 
+        stage('Docker Compose Down (Clean up)') {
+            steps {
+                script {
+                    echo "🧹 Stopping any existing containers..."
+                    sh 'docker-compose down || true'
+                }
+            }
+        }
+
         stage('Build Docker Images') {
             steps {
-                dir('jenkins-prac') {
-                    sh 'docker-compose build'
+                script {
+                    echo "🐳 Building Docker images..."
+                    sh 'docker-compose build --no-cache'
                 }
             }
         }
 
         stage('Deploy to AWS') {
             steps {
-                dir('jenkins-prac') {
+                script {
+                    echo "🚀 Deploying to AWS EC2..."
                     sh 'docker-compose up -d'
                 }
             }
+        }
+
+        stage('Verify Services') {
+            steps {
+                script {
+                    echo "🔍 Checking running containers..."
+                    sh 'docker ps'
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            echo "❌ Build failed. Please check the logs."
+        }
+        success {
+            echo "✅ Deployment successful. All systems go!"
         }
     }
 }
