@@ -1,4 +1,5 @@
 version: '3'
+
 services:
   frontend:
     build: ./client
@@ -6,12 +7,14 @@ services:
     ports:
       - "3001:80"
     restart: always
+    depends_on:
+      - backend
 
   backend:
     build: ./server
     container_name: backend
     ports:
-      - "5001:9000"
+      - "9000:9000"
     restart: always
     env_file:
       - ./server/.env

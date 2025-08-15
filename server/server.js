@@ -15,7 +15,7 @@ const app = express()
 // }));app.use(express.json());app.use(express.json())
 
 app.use(cors({
-  origin: ['http://books.yogeshtech.xyz', 'http://localhost:5173','http://school.yogeshtech.xyz'],
+  origin: [ 'http://localhost:5173','http://school.yogeshtech.xyz'],
   credentials: true
 }));
 
